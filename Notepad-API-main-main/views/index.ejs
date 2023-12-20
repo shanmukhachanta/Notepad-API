@@ -1,0 +1,46 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+
+<body>
+  <nav>
+    <div class="site-title">
+      <a href="/about"><h1>NotePad</h1></a>
+      <p>Welcome</p>
+    </div>
+   
+    <ul>
+      <% if (user) { %>
+        <li>Welcome, <%= user.email %></li>
+        <li><a href="/logout">Log out</a></li>
+      <% } else { %>
+        <li><a href="/login">Log in</a></li>
+        <li><a href="/signup" class="btn">Sign up</a></li>
+      <% } %>
+      <li><a href="/blogs/index">Notes</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/create">New Note</a></li>
+    </ul>
+</nav>
+
+  <div class="blogs content">
+      <% if (blogs.length > 0) { %>
+          <h2>All Blogs</h2> <!-- Move the heading inside the if statement -->
+
+          <% blogs.forEach(blog => { %>
+              <a class="single" href="/blogs/<%= blog._id %>">
+                  <h3 class="title"><%= blog.title %></h3>
+                  <p class="snippet"><%= blog.snippet %></p>
+              </a>
+          <% }) %>
+      <% } else { %>
+          <p>There are no Notes to display...</p>
+      <% } %>
+  </div>
+
+  <% include('partials/footer'); %>
+</body>
